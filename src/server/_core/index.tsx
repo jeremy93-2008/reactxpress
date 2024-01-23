@@ -1,12 +1,12 @@
 import express from 'express'
 import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
-import { config } from '../../reactxpress.config'
+import { config } from '../../../reactxpress.config'
 
-import Root from '../client/root'
+import App from '../../client/main'
 
-import middleware from './middlewares'
-import routes from './routes'
+import middleware from '../middlewares'
+import routes from '../routes'
 
 const app = express()
 
@@ -41,7 +41,7 @@ async function server() {
 
     // client
     app.use(config.clientUrl, (request, response, next) => {
-        const { pipe } = renderToPipeableStream(<Root />, {
+        const { pipe } = renderToPipeableStream(<App />, {
             bootstrapModules: process.env.NODE_ENV === 'development' ? ['./client.js', './hmr.js'] : ['./client.js'],
             onShellReady() {
                 response.setHeader('content-type', 'text/html')
