@@ -6,7 +6,7 @@ import { config } from '../../reactxpress.config'
 import App from '../client/App'
 
 import middleware from './middlewares'
-import routes from './_routes'
+import routes from './routes'
 
 const app = express()
 
@@ -47,6 +47,14 @@ async function server() {
                 response.setHeader('content-type', 'text/html')
                 pipe(response)
             },
+            onShellError(error) {
+                response.statusCode = 500;
+                response.setHeader('content-type', 'text/html');
+                response.send('<h1>Something went wrong</h1>');
+            },
+            onError(error) {
+                console.error(error);
+            }
         })
     })
 
