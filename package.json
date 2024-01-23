@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "esbuild ./src/client/index.tsx --bundle --outfile=./dist/client/index.js && tsx watch ./src/server/index.tsx",
+    "dev": "NODE_ENV=development node ./scripts/dev.js",
+    "dev:prod": "NODE_ENV=production node ./scripts/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "express-file-routing": "^3.0.3",
+    "node-fetch-commonjs": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -19,6 +22,7 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "esbuild": "0.19.11",
+    "express-ws": "^5.0.2",
     "tsx": "^4.7.0"
   }
 }
