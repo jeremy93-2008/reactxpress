@@ -42,7 +42,7 @@ async function server() {
     // client
     app.use(config.clientUrl, (request, response, next) => {
         const { pipe } = renderToPipeableStream(<Root />, {
-            bootstrapModules: process.env.NODE_ENV === 'development' ? ['./client.js', './hmr.js'] : ['./client.js'],
+            bootstrapModules: ['<client>'],
             onShellReady() {
                 response.setHeader('content-type', 'text/html')
                 pipe(response)

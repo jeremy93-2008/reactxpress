@@ -1,6 +1,5 @@
-const { build } = require('./build')
+const { build } = require('./build-dev')
 const { spawn } = require('node:child_process')
-const fetch = require('node-fetch-commonjs')
 
 async function dev() {
     build(process.env.NODE_ENV)

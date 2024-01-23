@@ -1,4 +1,5 @@
 const esbuild = require('esbuild')
+const chunkNamePlugin = require('./plugins/chunkName.esbuild')
 
 async function build(mode) {
     async function buildServer() {
@@ -10,6 +11,10 @@ async function build(mode) {
                 bundle: true,
                 platform: 'node',
                 target: 'node14',
+                loader: {
+                    '.js': 'jsx',
+                },
+                plugins: [chunkNamePlugin(['./client.js', './hmr.js'])],
             })
             .catch(() => process.exit(1))
 
@@ -44,9 +49,11 @@ async function build(mode) {
             .catch(() => process.exit(1))
     }
 
-    buildServer()
     buildClient()
+    buildServer()
     if (mode === 'development') buildHmr()
+
+    return ['./client.js', './hmr.js']
 }
 
 build()
